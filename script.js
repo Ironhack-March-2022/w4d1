@@ -260,6 +260,17 @@ function createRandomNumber(min, max) {
 	})
 }
 
+function createRandomNumber2(min, max) {
+	return new Promise(function (resolve, reject) {
+		if (min === 1) {
+			return reject(new Error('invalid argument'))
+		}
+		setTimeout(function () {
+			resolve(Math.floor(Math.random() * (max - min + 1) + min))
+		}, 3000)
+	})
+}
+
 // how to use a function that is async and returns a promise
 // using .then and .catch -> .then() defines what we want to do with  
 // the succesful result / .catch() defines what we want to do with an 
@@ -294,21 +305,32 @@ function createRandomNumber(min, max) {
 
 // IIFE - declaring and calling a function at once 
 
-(async function () {
-	// for error handling we add a try catch
-	try {
-		const result = await createRandomNumber(1, 10)
-		console.log(result)
-	} catch (error) {
-		console.log('an errror occurred : ', error.message)
-	} finally {
-		// this always executes
-		console.log('done')
-	}
-})()
+// (async function () {
+// 	// for error handling we add a try catch
+// 	try {
+// 		const result = await createRandomNumber(1, 10)
+// 		console.log(result)
+// 	} catch (error) {
+// 		console.log('an errror occurred : ', error.message)
+// 	} finally {
+// 		// this always executes
+// 		console.log('done')
+// 	}
+// })()
 
 
-
+// if we have multiple async functions and we want to wait until
+// all of them are finished -> Promise.all()
+console.log(createRandomNumber(3, 5))
+console.log('start')
+// Promise.all([
+// 	createRandomNumber(3, 7),
+// 	createRandomNumber2(4, 9)
+// ]).then(function (result) {
+// 	console.log(result)
+// }).catch(function (err) {
+// 	console.log(err)
+// })
 
 
 
